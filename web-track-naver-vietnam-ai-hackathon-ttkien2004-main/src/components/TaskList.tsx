@@ -13,6 +13,30 @@ const TaskList: React.FC<TaskListProps> = ({
 	setPressAddButton,
 	setSelectedTask,
 }) => {
+	// Hàm xử lý trạng thái dựa vào dueDate
+	const getDueDateBadge = (dueDateStr: string) => {
+		if (!dueDateStr) {
+			return <span className="badge bg-secondary">No due date</span>;
+		}
+
+		const today = new Date();
+		const dueDate = new Date(dueDateStr);
+
+		// Bỏ giờ phút giây để so sánh ngày
+		const todayStr = today.toISOString().split("T")[0];
+		const dueDateOnly = dueDate.toISOString().split("T")[0];
+
+		if (dueDateOnly > todayStr) {
+			// chưa tới hạn
+			return <span className="badge bg-warning text-dark">upcoming</span>;
+		} else if (dueDateOnly === todayStr) {
+			// hôm nay là hạn
+			return <span className="badge bg-primary">in progress</span>;
+		} else {
+			// trễ hạn
+			return <span className="badge bg-danger">deadline</span>;
+		}
+	};
 	return (
 		<div>
 			<div
@@ -40,7 +64,8 @@ const TaskList: React.FC<TaskListProps> = ({
 						}}
 					>
 						{task.title}
-						<span className="badge bg-secondary">Task</span>
+						<span className="badge bg-secondary">{task.type}</span>
+						<span>{getDueDateBadge(task.dueDate || "")}</span>
 					</li>
 				))}
 			</ul>

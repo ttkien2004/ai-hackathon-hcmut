@@ -81,7 +81,7 @@ const HomePage: React.FC = () => {
 						<h3 className="font-semibold">{list.name}</h3>
 						<p className="text-sm text-gray-500">Type: {list.type}</p>
 						<p className="text-xs text-gray-400 mt-2">
-							{list.items.length} mục
+							{JSON.parse(localStorage.getItem(list.id) || "[]").length} mục
 						</p>
 					</div>
 				))}

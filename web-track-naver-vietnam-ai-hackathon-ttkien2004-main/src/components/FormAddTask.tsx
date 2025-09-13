@@ -66,6 +66,23 @@ const FormAddTask: React.FC<FormAddTaskProps> = ({
 		triggerToast(res.message || "");
 	};
 
+	// Cập nhật status theo dueDate
+	useEffect(() => {
+		if (!newTask.dueDate) return;
+
+		const todayStr = new Date().toISOString().split("T")[0];
+		const dueDateStr = new Date(newTask.dueDate).toISOString().split("T")[0];
+
+		if (dueDateStr > todayStr) {
+			setNewTask((prev) => ({ ...prev, status: "pending" }));
+		} else if (dueDateStr === todayStr) {
+			setNewTask((prev) => ({ ...prev, status: "in_progress" }));
+		} else {
+			// quá hạn thì có thể set completed hoặc giữ nguyên
+			setNewTask((prev) => ({ ...prev, status: "completed" }));
+		}
+	}, [newTask.dueDate]);
+
 	return (
 		<div className="col-3 bg-white border-start p-4">
 			<h4>Add Task</h4>
@@ -90,20 +107,12 @@ const FormAddTask: React.FC<FormAddTaskProps> = ({
 			</div>
 			<div className="mb-3">
 				<label className="form-label">Status</label>
-				<select
-					className="form-select"
-					value={newTask.status}
-					onChange={(e) =>
-						setNewTask({
-							...newTask,
-							status: e.target.value as Task["status"],
-						})
-					}
-				>
-					<option value="pending">Pending</option>
-					<option value="in-progress">In Progress</option>
-					<option value="completed">Completed</option>
-				</select>
+				<input
+					type="text"
+					className="form-control"
+					value={newTask.status === "in_progress" ? "In Progress" : "Pending"}
+					readOnly
+				/>
 			</div>
 			<div className="mb-3">
 				<label className="form-label">Priority</label>
