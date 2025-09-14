@@ -115,23 +115,6 @@ const FormAddTask: React.FC<FormAddTaskProps> = ({
 				/>
 			</div>
 			<div className="mb-3">
-				<label className="form-label">Priority</label>
-				<select
-					className="form-select"
-					value={newTask.priority}
-					onChange={(e) =>
-						setNewTask({
-							...newTask,
-							priority: e.target.value as Task["priority"],
-						})
-					}
-				>
-					<option value="low">Low</option>
-					<option value="medium">Medium</option>
-					<option value="high">High</option>
-				</select>
-			</div>
-			<div className="mb-3">
 				<label className="form-label">Due Date</label>
 				<input
 					type="date"
@@ -177,6 +160,9 @@ const FormAddTask: React.FC<FormAddTaskProps> = ({
 					onClick={() => {
 						handleAdd({ ...newTask, id: generateRandom16DigitNumber() });
 						setTotalTodo(getAllTasks(id || "").length);
+						setNewTask(initialTask);
+
+						window.scrollTo({ top: 0, behavior: "smooth" });
 					}}
 				>
 					Save

@@ -84,14 +84,6 @@ const TaskDetails: React.FC<TaskDetailsProps> = ({
 			</div>
 
 			<div className="mb-3">
-				<label className="form-label fw-bold">List</label>
-				<select className="form-select">
-					<option>Personal</option>
-					<option>Task</option>
-				</select>
-			</div>
-
-			<div className="mb-3">
 				<label className="form-label fw-bold">Due Date</label>
 				<input
 					type="date"
@@ -99,6 +91,18 @@ const TaskDetails: React.FC<TaskDetailsProps> = ({
 					value={updatedTask.dueDate}
 					onChange={(e) =>
 						setUpdatedTask({ ...updatedTask, dueDate: e.target.value })
+					}
+				/>
+			</div>
+
+			<div className="mb-3">
+				<label className="form-label fw-bold">Finished Date</label>
+				<input
+					type="date"
+					className="form-control"
+					value={updatedTask.finishedDate}
+					onChange={(e) =>
+						setUpdatedTask({ ...updatedTask, finishedDate: e.target.value })
 					}
 				/>
 			</div>

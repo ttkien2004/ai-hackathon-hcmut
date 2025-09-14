@@ -40,7 +40,7 @@ const BookListPage = () => {
 
 	return (
 		<div className="container-fluid flex-1">
-			<div className="row h-100">
+			<div className="row" style={{ minHeight: "100vh" }}>
 				{/* Sidebar */}
 				<div className="col-3 bg-light border-end p-3">
 					<h5 className="mb-4">Menu</h5>

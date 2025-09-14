@@ -28,10 +28,7 @@ const BookList: React.FC<BookListProps> = ({
 
 	return (
 		<div>
-			<div
-				className="d-flex justify-content-between align-items-center mb-3"
-				style={{ cursor: "pointer" }}
-			>
+			<div className="d-flex justify-content-between align-items-center mb-3">
 				<h3>
 					My Books <span className="text-muted">{totalBooks}</span>
 				</h3>
@@ -43,26 +40,27 @@ const BookList: React.FC<BookListProps> = ({
 				</button>
 			</div>
 
-			<ul className="list-group">
-				{books.map((book) => (
-					<li
-						key={book.id}
-						className="list-group-item d-flex justify-content-between align-items-center"
-						onClick={() => {
-							setSelectedBook(book);
-							setPressAddButton(false);
-						}}
-					>
-						<div>
-							<strong>{book.title}</strong>
-							<br />
-							<small className="text-muted">{book.description}</small>
-						</div>
-						<span className="badge bg-info">{book.status}</span>
-						{getReadingStatus(book)}
-					</li>
-				))}
-			</ul>
+			<div style={{ maxHeight: "400px", overflowY: "auto" }}>
+				<ul className="list-group">
+					{books.map((book) => (
+						<li
+							key={book.id}
+							className="list-group-item d-flex justify-content-between align-items-center"
+							onClick={() => {
+								setSelectedBook(book);
+								setPressAddButton(false);
+							}}
+						>
+							<div>
+								<strong>{book.title}</strong>
+								<br />
+								<small className="text-muted">{book.description}</small>
+							</div>
+							{getReadingStatus(book)}
+						</li>
+					))}
+				</ul>
+			</div>
 		</div>
 	);
 };

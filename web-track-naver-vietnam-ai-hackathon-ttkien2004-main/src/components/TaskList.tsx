@@ -54,21 +54,23 @@ const TaskList: React.FC<TaskListProps> = ({
 				</button>
 			</div>
 
-			<ul className="list-group">
-				{tasks.map((task) => (
-					<li
-						key={task.id}
-						className="list-group-item d-flex justify-content-between align-items-center"
-						onClick={() => {
-							setSelectedTask(task), setPressAddButton(false);
-						}}
-					>
-						{task.title}
-						<span className="badge bg-secondary">{task.type}</span>
-						<span>{getDueDateBadge(task.dueDate || "")}</span>
-					</li>
-				))}
-			</ul>
+			<div style={{ maxHeight: "400px", overflowY: "auto" }}>
+				<ul className="list-group">
+					{tasks.map((task) => (
+						<li
+							key={task.id}
+							className="list-group-item d-flex justify-content-between align-items-center"
+							onClick={() => {
+								setSelectedTask(task), setPressAddButton(false);
+							}}
+						>
+							{task.title}
+							<span className="badge bg-secondary">{task.type}</span>
+							<span>{getDueDateBadge(task.dueDate || "")}</span>
+						</li>
+					))}
+				</ul>
+			</div>
 		</div>
 	);
 };

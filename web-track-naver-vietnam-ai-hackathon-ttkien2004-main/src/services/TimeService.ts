@@ -28,7 +28,7 @@ const TimeApi = {
 			due.getDate() !== finished.getDate()
 		) {
 			const diff = Math.ceil(
-				(due.getTime() - finished.getTime()) / (1000 * 60 * 60 * 24)
+				(finished.getTime() - due.getTime()) / (1000 * 60 * 60 * 24)
 			);
 			return diff >= 0 ? `${diff} ngày` : "Quá hạn";
 		}

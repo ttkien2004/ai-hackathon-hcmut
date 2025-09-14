@@ -148,6 +148,9 @@ const FormAddBook: React.FC<FormAddBookProps> = ({
 					onClick={() => {
 						handleAdd({ ...newBook, id: generateRandom16DigitNumber() });
 						setTotalBooks(getAllBooks(id || "").length);
+
+						setNewBook(initialBook);
+						window.scrollTo({ top: 0, behavior: "smooth" });
 					}}
 				>
 					Save
