@@ -23,17 +23,12 @@ export interface Personal {
 	updatedAt?: string;
 }
 
-export interface BaseItem {
+export interface Book {
 	id: string;
+	author: string;
 	title: string;
-	description?: string;
+	description: string;
 	status: "pending" | "in_progress" | "completed";
-	dueDate?: string;
-	finishedDate?: string;
-	priority?: "low" | "medium" | "high";
-	estimatedTime?: number; // in hours
-}
-
-export interface TodoTypes {
-	type: Task | Personal;
+	totalOfPages: number;
+	pagesHaveRead: number;
 }

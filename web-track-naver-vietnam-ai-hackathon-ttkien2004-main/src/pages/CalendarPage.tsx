@@ -16,9 +16,8 @@ const CalendarPage = () => {
 	]);
 	return (
 		<div className="d-flex">
-			{/* <Sidebar /> bạn đã làm rồi */}
 			<div className="flex-grow-1 p-3">
-				<CalendarView type="" />
+				<CalendarView />
 			</div>
 		</div>
 	);

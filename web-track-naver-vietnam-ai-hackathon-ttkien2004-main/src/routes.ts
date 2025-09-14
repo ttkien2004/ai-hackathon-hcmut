@@ -1,15 +1,18 @@
 import React, { lazy } from "react";
 import DefaultLayout from "./layout/DefaultLayout";
 import type { RouteObject } from "react-router-dom";
+import BookProgressView from "./components/BookProgressView";
 
 // Lazy load các page
 const TaskPage = lazy(() => import("./pages/TaskListPage"));
 const CalendarPage = lazy(() => import("./pages/CalendarPage"));
 const ErrorBoundary = lazy(() => import("./layout/ErrorBoundary"));
-const StatsPage = lazy(() => import("./pages/StatsPage"));
 const HomePage = lazy(() => import("./pages/HomePage"));
 const TestPage = lazy(() => import("./pages/TestPage"));
 const KanbanPage = lazy(() => import("./pages/KanbanPage"));
+const BookPage = lazy(() => import("./pages/BookListPage"));
+const ProgressViewPage = lazy(() => import("./pages/ProgressPage"));
+const StatisticsViewPage = lazy(() => import("./pages/StatisticsPage"));
 
 const routes: RouteObject[] = [
 	{
@@ -26,10 +29,6 @@ const routes: RouteObject[] = [
 		element: React.createElement(CalendarPage),
 	},
 	{
-		path: "/stats",
-		element: React.createElement(StatsPage),
-	},
-	{
 		path: "/tasks/:id",
 		element: React.createElement(TaskPage),
 	},
@@ -40,6 +39,18 @@ const routes: RouteObject[] = [
 	{
 		path: "/kanban/:id",
 		element: React.createElement(KanbanPage),
+	},
+	{
+		path: "/books/:id",
+		element: React.createElement(BookPage),
+	},
+	{
+		path: "/progress/:id",
+		element: React.createElement(ProgressViewPage),
+	},
+	{
+		path: "/stats/:id",
+		element: React.createElement(StatisticsViewPage),
 	},
 ];
 

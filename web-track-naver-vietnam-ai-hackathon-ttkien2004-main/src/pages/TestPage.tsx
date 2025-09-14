@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import type { Task } from "../data-types/Types";
+import { type Book, type Task } from "../data-types/Types";
 import { TASK_STORAGE_KEY } from "../storage_key/StorageKeys";
-import FormAddTask from "../components/FormAddTask";
+// import FormAddTask from "../components/FormAddTask";
 import TaskDetails from "../components/TaskDetails";
+import FormAddBook from "../components/FormAddBook";
+import BookDetails from "../components/BookDetails";
 
 const TestPage = () => {
 	const initialTask: Task = {
@@ -14,10 +16,23 @@ const TestPage = () => {
 		priority: "medium",
 		estimatedTime: undefined,
 	};
+
 	const [tasks, setTasks] = useState<Task[]>([]);
 	const [selectedTask, setSelectedTask] = useState<Task>(initialTask);
 	const [pressAddButton, setPressAddButton] = useState<boolean>(true);
 	const [totalTodo, setTotalTodo] = useState<number>(0);
+	// books
+	const initialBook: Book = {
+		id: "",
+		title: "",
+		description: "",
+		status: "pending",
+		totalOfPages: 0,
+		pagesHaveRead: 0,
+	};
+	const [books, setBooks] = useState<Book[]>([]);
+	const [totalBooks, setTotalBooks] = useState<number>(0);
+	const [selectedBook, setSelectedBook] = useState<Book>(initialBook);
 
 	// Hàm tính số ngày còn lại để hoàn thiện deadline
 	const daysLeft = (dueDate: string, finishedDate: string): number => {
@@ -111,12 +126,18 @@ const TestPage = () => {
 
 				{/* Task Detail */}
 				{pressAddButton ? (
-					<FormAddTask setTasks={setTasks} setTotalTodo={setTotalTodo} />
+					// <FormAddTask setTasks={setTasks} setTotalTodo={setTotalTodo} />
+					<FormAddBook setBooks={setBooks} setTotalBooks={setTotalBooks} />
 				) : (
-					<TaskDetails
-						selectedTask={selectedTask}
-						setTasks={setTasks}
-						setSelectedTask={setSelectedTask}
+					// <TaskDetails
+					// 	selectedTask={selectedTask}
+					// 	setTasks={setTasks}
+					// 	setSelectedTask={setSelectedTask}
+					// />
+					<BookDetails
+						setBooks={setBooks}
+						setSelectedBook={setSelectedBook}
+						selectedBook={selectedBook}
 					/>
 				)}
 			</div>

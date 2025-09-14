@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 interface ListData {
 	id: string;
 	name: string;
-	type: "task" | "personal";
+	type: "task" | "book";
 	items: any[];
 }
 
@@ -12,7 +12,7 @@ const HomePage: React.FC = () => {
 	const [lists, setLists] = useState<ListData[]>([]);
 	const [showPopup, setShowPopup] = useState(false);
 	const [newName, setNewName] = useState("");
-	const [newType, setNewType] = useState<"task" | "personal">("task");
+	const [newType, setNewType] = useState<"task" | "book">("task");
 	const navigate = useNavigate();
 
 	// Load lists từ localStorage
@@ -23,14 +23,7 @@ const HomePage: React.FC = () => {
 		}
 	}, []);
 
-	// Lưu lại mỗi khi lists thay đổi
-	// useEffect(() => {
-	// 	localStorage.setItem("lists", JSON.stringify(lists));
-	// }, [lists]);
-
 	const handleAddList = () => {
-		// if (!newName.trim()) return;
-
 		const newList: ListData = {
 			id: Date.now().toString(),
 			name: newName,
@@ -43,6 +36,7 @@ const HomePage: React.FC = () => {
 			localStorage.setItem("lists", JSON.stringify(updatedLists));
 			return updatedLists;
 		});
+
 		setNewName("");
 		setNewType("task");
 		setShowPopup(false);
@@ -68,13 +62,16 @@ const HomePage: React.FC = () => {
 						key={list.id}
 						className="p-4 rounded-lg shadow bg-white hover:shadow-md transition"
 						onClick={() => {
-							if (localStorage.getItem(list.id)) {
-								// Nếu đã có list thì khi nhấn vào sẽ không cần tạo list rỗng
-								navigate(`/tasks/${list.id}`);
-							} else {
-								// Nếu list chưa tạo thì tạo list rỗng với key là id
+							// Nếu chưa có data thì tạo list rỗng
+							if (!localStorage.getItem(list.id)) {
 								localStorage.setItem(list.id, "[]");
+							}
+
+							// Navigate dựa trên type
+							if (list.type === "task") {
 								navigate(`/tasks/${list.id}`);
+							} else if (list.type === "book") {
+								navigate(`/books/${list.id}`);
 							}
 						}}
 					>
@@ -103,13 +100,11 @@ const HomePage: React.FC = () => {
 
 						<select
 							value={newType}
-							onChange={(e) =>
-								setNewType(e.target.value as "task" | "personal")
-							}
+							onChange={(e) => setNewType(e.target.value as "task" | "book")}
 							className="w-full border p-2 mb-3 rounded"
 						>
 							<option value="task">Task</option>
-							<option value="personal">Personal</option>
+							<option value="book">Book</option>
 						</select>
 
 						<div className="flex justify-end gap-2">

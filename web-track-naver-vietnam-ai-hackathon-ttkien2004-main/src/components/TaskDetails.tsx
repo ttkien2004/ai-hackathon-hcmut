@@ -65,6 +65,10 @@ const TaskDetails: React.FC<TaskDetailsProps> = ({
 			)
 		);
 	}, []);
+
+	useEffect(() => {
+		setUpdatedTask(selectedTask);
+	}, [selectedTask]);
 	return (
 		<div className="col-3 bg-white border-start p-4">
 			<h5>Task: {selectedTask.title}</h5>

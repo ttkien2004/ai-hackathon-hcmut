@@ -18,7 +18,7 @@ const KanbanPage = () => {
 		<div className="d-flex">
 			{/* <Sidebar /> bạn đã làm rồi */}
 			<div className="flex-grow-1 p-3">
-				<KanbanView tasks={tasks} setTasks={setTasks} />
+				<KanbanView />
 			</div>
 		</div>
 	);
