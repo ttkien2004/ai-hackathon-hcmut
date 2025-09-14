@@ -65,8 +65,13 @@ const TaskList: React.FC<TaskListProps> = ({
 							}}
 						>
 							{task.title}
-							<span className="badge bg-secondary">{task.type}</span>
-							<span>{getDueDateBadge(task.dueDate || "")}</span>
+							<span>
+								{task.status === "completed" ? (
+									<span className="badge bg-success">completed</span>
+								) : (
+									getDueDateBadge(task.dueDate || "")
+								)}
+							</span>
 						</li>
 					))}
 				</ul>
